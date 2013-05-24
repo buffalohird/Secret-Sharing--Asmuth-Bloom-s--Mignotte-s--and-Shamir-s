@@ -1,0 +1,85 @@
+(* Breaks up a string into a list of characters. 
+ * BORROWED FROM PS3 / CREDIT TO WRITERS OF PS3 *)
+let rec explode (s: string) : char list =
+  let len = String.length s in
+  if len = 0 then []
+  else (s.[0])::(explode (String.sub s 1 (len - 1)))
+;;
+
+(* Condenses a list of characters into a string. 
+ * BORROWED FROM PS3 / CREDIT TO WRITERS OF PS3 *)
+let rec implode (cs: char list) : string =
+  match cs with
+    | [] -> ""
+    | c::t -> (String.make 1 c)^(implode t)
+;;
+
+(* Splits a list into a list of length int*)
+let rec split_helper (lst: char list) (counter: int) : (char list) =
+  if counter = 0 then 
+    []
+  else 
+    match lst with
+    | hd::tl -> hd :: split_helper tl (counter-1)
+    | _ -> failwith "Shouldn't Happen (split_helper)"
+;;
+
+let rec split_helper_2 (lst:char list) (counter: int) : (char list) =
+  match lst with
+  | hd::tl -> (if counter = 1 then tl
+              else split_helper_2 tl (counter-1))
+  | _ -> failwith "Shouldn't Happen (split_helper_2)"
+
+;;
+
+let split_tuple (lst:char list) (n: int) : (char list)*(char list) =
+  ((split_helper lst n), (split_helper_2 lst n))
+;;
+
+let rec split_tuple_list (lst: char list) (n: int) : (char list list) =
+  let (a,b) = split_tuple lst n in
+  if List.length b < n then a::b::[]
+  else 
+    a:: (split_tuple_list b n)
+;;
+
+let rec split_fixer (lst : char list list) = 
+  let empty = [] in
+  List.filter (fun x -> x != empty) lst;;
+
+
+(*[a@ (split_tuple_list (split_tuple b n) n)]
+  else *)
+
+
+
+
+
+
+(*
+let rec gen_split_list (lst: char list) (n: int) : (char list list) =
+  match n with
+  | 1 -> List.map (fun x -> [x]) lst
+  | 10 -> 
+  | 100 ->
+  | 1000 ->
+  | _ -> failwith "Will never be the case"
+;;
+     
+
+let splitter (secret: big_int) (*: (big_int list)*) =
+  let big_string = string_of_big_int secret in
+  let secret_char_list = explode big_string in
+  let char_list_length = List.length secret_char_list in
+  if char_list_length < 10 then
+    (List.map implode (gen_split_list secret_char_list 1))
+  else if char_list_length < 100 then
+    (List.map implode (gen_split_list secret_char_list 10))
+  else if char_list_length < 1000 then
+    (List.map implode (gen_split_list secret_char_list 100))
+  else 
+    (List.map implode (gen_split_list secret_char_list 1000))
+;;
+    
+  
+*)

@@ -1,0 +1,2 @@
+title: Secret Sharing: Asmuth-Bloom's, Mignotte's, and Shamir's
+seas-usernames: adamsu, buffalohird, bukhta, jeffersonlee

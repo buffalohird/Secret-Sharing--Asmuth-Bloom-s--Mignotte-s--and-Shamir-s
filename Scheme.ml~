@@ -1,0 +1,23 @@
+module Mignotte = 
+struct
+  let encode = CRT.encode_mignotte
+  let decode = CRT.decode_mignotte
+end 
+
+module Asmuth = 
+struct 
+  let encode = CRT.encode_asmuth
+  let decode = CRT.decode_mignotte
+end
+
+module Mignotte_String = 
+struct 
+  let encode = CRT.encode_string_mignotte
+  let decode = CRT.decode_string_mignotte
+end
+
+module Asmuth_String = 
+struct 
+  let encode = CRT.encode_string_asmuth
+  let decode = CRT.decode_string_asmuth
+end
